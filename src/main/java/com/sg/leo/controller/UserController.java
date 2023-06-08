@@ -28,26 +28,23 @@ public class UserController {
 	public @ResponseBody String insertUser(@RequestBody User user) {
 		user.setRole(RoleType.USER);
 		userRepository.save(user);
-		return user.getUsername() + "님 회원가입 성공";
+		return user.getUsername() + " 회원가입 성공";
 	}
 	
-	@GetMapping("/user/get/{id}")
-	public @ResponseBody User getUser(@PathVariable int id) {
-		User findUser = userRepository.findById(id).orElseThrow(()->{
-			return new ZblogException(id + "회원 없음");
-		});
-		
-		return findUser;
+@GetMapping("/user/get/{id}")
+public @ResponseBody User getUser(@PathVariable int id) {
+	User findUser = userRepository.findById(id).orElseThrow(() ->{
+		return new ZblogException(id + "회원없음");
+	});
+	return findUser;
 	}
-	
 	@DeleteMapping("/user/{id}")
 	public @ResponseBody String deleteUser(@PathVariable int id) {
-		userRepository.deleteById(id);
-		return id + "번 회원삭제 성공";
+	userRepository.deleteById(id);
+	return id + "번 회원 삭제성공";
 	}
-	
 	@GetMapping("/user/list")
-	public @ResponseBody List<User> getuserList(){
+	public @ResponseBody List<User> getUserList(){
 		return userRepository.findAll();
 	}
 	
@@ -60,8 +57,19 @@ public class UserController {
 	private UserService userService;
 	@PostMapping("/auth/insertUser")
 	public @ResponseBody ResponseDTO<?> insertUsers(@RequestBody User user){
-		userService.insertUser(user);
-		return new ResponseDTO<>(HttpStatus.OK.value(), 
-				user.getUsername() + "님 회원가입 성공했습니다");
+		
+		User findUser = userService.getUser(user.getUsername());
+		if(findUser.getUsername() == null) {
+		 // 같은 username 회원 없음 , 회원가입 진행
+			userService.insertUser(user);
+			return new ResponseDTO<>(HttpStatus.OK.value(),
+					user.getUsername() + "님 회원가입 성공했어요");
+		} else {
+		    // 중복된 username있음, 에러메세지 표시 
+			return new ResponseDTO<>(HttpStatus.BAD_REQUEST.value(),
+					user.getUsername() + " 님 이미 회원임 또는 username 사용중");
+		}
+		
 	}
 }
+

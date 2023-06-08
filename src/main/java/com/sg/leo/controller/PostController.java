@@ -9,5 +9,10 @@ public class PostController {
 	public String getPostList() {
 		return "zblogindex";
 	}
+	
+	@GetMapping("/auth/insertPost")
+	public String insertPost() {
+		return "post/insertPost";
+	}
 
 }

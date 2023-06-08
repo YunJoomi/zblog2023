@@ -1,9 +1,7 @@
 /**
  * 
  */
- 
- /*
- function usersubmit() {
+ /*function usersubmit() {
    alert("회원가입 요청됨:old style javascript");
 
    let user = {
@@ -12,7 +10,6 @@
       email: document.getElementById("email").value
    }
    console.log(user);
-
 
    var ajaxrequest = new XMLHttpRequest();
 
@@ -34,9 +31,7 @@ function memberjoin() {
    btnsave.onclick = usersubmit;
 }
 
-memberjoin();
-
-*/
+memberjoin();*/
 
 /**
  /sbootblog/src/main/resources/static/js/user.js
@@ -51,9 +46,8 @@ memberjoin();
         });
     },
 
-    
-   insertUser: function() {
-      alert("회원가입 요청됨 jq");
+ insertUser: function() {
+      alert("회원가입 요청됨");
       // 회원정보 추출
       let user = {
          username: $("#username").val(),
@@ -66,13 +60,13 @@ memberjoin();
       $.ajax({
          type: "POST",
          // 시험으로는 /user로 함
-         url: "/auth/insertuser",
+         url: "/auth/insertUser",
          data: JSON.stringify(user),
          contentType: "application/json; charset=utf-8"
       }).done(function(response) {
          console.log(response);
-         alert(response);
-         location = "/";
+         alert(response[data]);
+         // location = "/";
       }).fail(function(error) {
          alert("!/js/user.js에서 에러발생: " + error);
       });
