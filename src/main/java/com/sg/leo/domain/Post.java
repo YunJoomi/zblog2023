@@ -23,24 +23,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="ZBLOGPOST")
-
+@Table(name = "ZBlogPOST")
 public class Post {
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	
-	@Column(nullable=false, length=100)
-	private String title;
-	
-	@Column(nullable=false)
-	private String content;
-	
-	@CreationTimestamp
-	private Timestamp createDate;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="userid")
-	private User user;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   private int id;
 
+   @Column(nullable = false, length = 100)
+   private String title;
+
+   // @Lob // for summernote
+   @Column(nullable = false)
+   private String content;
+
+   @CreationTimestamp
+   private Timestamp createDate;
+
+   private int cnt;
+
+   @ManyToOne(fetch = FetchType.EAGER) // import javax.persistence.FetchType;
+   @JoinColumn(name = "userid")
+   private User user;
 }
