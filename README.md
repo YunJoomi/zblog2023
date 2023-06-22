@@ -1,4 +1,4 @@
-![transparent](https://capsule-render.vercel.app/api?type=transparent&fontColor=timeGradient&text=zblog2023&height=150&fontSize=60&desc=Spring%20Framework&descAlignY=75&descAlign=60)
+![transparent](https://capsule-render.vercel.app/api?type=transparent&fontColor=6EA646&text=zblog2023&height=150&fontSize=60&desc=Spring%20Framework&descAlignY=75&descAlign=60)
 
 # 회원기반 게시판 관리 웹
 
